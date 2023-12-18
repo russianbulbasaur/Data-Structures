@@ -52,6 +52,7 @@ void delete(int value){
                 head = node->next;
              }else{
                 prev->next = node->next;
+                tail = (node->next==null)?prev:tail;
              }
              printf("Deleted\n");
              free(node);
@@ -64,15 +65,14 @@ void delete(int value){
 
 
 void main(int argc, char* argv[]){
-   insert(4);
    insert(6);
-   insert(23);
-   insert(45);
-   insert(77);
+   insert(7);
    display();
-   find(77);
-   find(2);
-   find(6);
-   delete(4);
+   delete(7);
+   display();
+   insert(9);
+   insert(10);
+   insert(11);
+   insert(12);
    display();
 }
