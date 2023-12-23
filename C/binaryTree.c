@@ -76,9 +76,24 @@ void insert(char value){
        parent->right = newNode;
     }
     printf("Inserted : %c\n",value);
+    return;
 }
 
-void find(){
+void find(char value){
+     struct Node* currentNode = root;
+     while(currentNode!=NULL){
+          if(currentNode->value==value){
+             printf("Found %c\n",value);
+             return;
+          }
+          if(currentNode->value<value){
+             currentNode = currentNode->right;
+          }else{
+             currentNode = currentNode->left;
+          }
+     }
+     printf("%c not found\n",value);
+     return;
 }
 
 void delete(){
@@ -98,4 +113,7 @@ void main(){
    postorder(root);
    printf("\n");
    inorder(root);
+   printf("\n");
+   find('G');
+   find('D');
 }
