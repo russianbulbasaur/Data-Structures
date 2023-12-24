@@ -96,7 +96,20 @@ void find(char value){
      return;
 }
 
-void delete(){
+void delete(char value){
+    struct Node* currentNode = root;
+    while(currentNode!=NULL){
+         if(currentNode->value==value){
+             
+          }
+          if(currentNode->value<value){
+             currentNode = currentNode->right;
+          }else{
+             currentNode = currentNode->left;
+          }
+    }
+    printf("%c not found\n",value);
+    return;
 }
 
 
