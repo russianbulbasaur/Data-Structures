@@ -97,14 +97,43 @@ void find(char value){
 }
 
 void delete(char value){
+    struct Node* parent = root;
     struct Node* currentNode = root;
+    int isLeft = 0;
     while(currentNode!=NULL){
          if(currentNode->value==value){
-             
+             //If no right subtree
+             if(currentNode->right==NULL){
+               if(isLeft){
+                 parent->left = currentNode->left;
+               }else{
+                 parent->right = currentNode->left;
+               }
+               printf("Deleted %c\n",currentNode->value);
+               return;
+             }
+             //Traverse to last left subtree
+             struct Node* subNode = NULL;
+             currentNode = currentNode->right;
+             while(currentNode!=NULL){
+                  subNode = currentNode;
+                  currentNode = currentNode->left;
+             }
+             if(isLeft){
+               parent->left = subNode;
+             }else{
+               parent->right = subNode;
+             }
+             printf("Deleted %c\n",subNode->value);
+             return;
           }
-          if(currentNode->value<value){
+          else if(currentNode->value<value){
+             isLeft = 0;
+             parent = currentNode;
              currentNode = currentNode->right;
           }else{
+             isLeft = 1;
+             parent = currentNode;
              currentNode = currentNode->left;
           }
     }
@@ -114,19 +143,15 @@ void delete(char value){
 
 
 void main(){
-   insert('A');
    insert('B');
    insert('C');
-   insert('D');
+   insert('A');
    insert('E');
-   display(root);
-   printf("\n");
+   insert('D');
+   insert('H');
+   insert('J');
+   insert('I');
    preorder(root);
-   printf("\n");
-   postorder(root);
-   printf("\n");
-   inorder(root);
-   printf("\n");
-   find('G');
-   find('D');
+   delete('E');
+   preorder(root);
 }
