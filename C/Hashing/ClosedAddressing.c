@@ -13,9 +13,9 @@ struct HashMap{
 } HashMap;
 
 int linearProbe(int);//0
-int linearStepProbe(int);//1
+int linearStepProbe(int,int);//1
 int quadraticProbe(int);//2
-int bucketHashing(int);//3
+int bucketHashing(int,int);//3
 int pseudoRandomProbe(int);//4
 int doubleHashing(int);//5
 void put(char* key,int value);
@@ -58,13 +58,13 @@ void put(char* key,int value){
          hashed = linearProbe(hashed);
          break;
        case 1:
-         hashed = linearStepProbe(hashed);
+         hashed = linearStepProbe(hashed,3);
          break;
        case 2:
          hashed = quadraticProbe(hashed);
          break;
        case 3:
-         hashed = bucketHashing(hashed);
+         hashed = bucketHashing(hashed,5);
          break;
        case 4:
          hashed = doubleHashing(hashed);
@@ -83,15 +83,17 @@ int get(char* key){
 
 
 int linearProbe(int hashed){
+    return ((hashed+1)%HashMap.max);
 }
 
-int linearStepProbe(int hashed){
+int linearStepProbe(int hashed,int stepSize){
+    return ((hashed+stepSize)%HashMap.max);
 }
 
 int quadraticProbe(int hashed){
 }
 
-int bucketHashing(int hashed){
+int bucketHashing(int hashed,int bucketSize){
 }
 
 int pseudoRandomProbe(int hashed){
