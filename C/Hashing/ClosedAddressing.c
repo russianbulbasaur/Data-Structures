@@ -12,12 +12,12 @@ struct HashMap{
      int max;
 } HashMap;
 
-int linearProbe();//0
-int linearStepProbe();//1
-int quadraticProbe();//2
-void bucketHashing();//3
-int pseudoRandomProbe();//4
-int doubleHashing();//5
+int linearProbe(int);//0
+int linearStepProbe(int);//1
+int quadraticProbe(int);//2
+int bucketHashing(int);//3
+int pseudoRandomProbe(int);//4
+int doubleHashing(int);//5
 void put(char* key,int value);
 int get(char* key);
 int hash(char* key);
@@ -47,21 +47,55 @@ void put(char* key,int value){
     keyPair->value = value;
     keyPair->key = key;
     int hashed = hash(key);
-    switch(probe){
-      case 0:
-        break;
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-      case 4:
-        break;
-      case 5:
-        break;
+    if(HashMap.elements[hashed]==NULL){
+      HashMap.elements[hashed] = keyPair;
+      printf("Inserted %i without probing\n",value);
+      return;
     }
+    while(HashMap.elements[hashed]!=NULL){
+      switch(probe){
+       case 0:
+         hashed = linearProbe(hashed);
+         break;
+       case 1:
+         hashed = linearStepProbe(hashed);
+         break;
+       case 2:
+         hashed = quadraticProbe(hashed);
+         break;
+       case 3:
+         hashed = bucketHashing(hashed);
+         break;
+       case 4:
+         hashed = doubleHashing(hashed);
+         break;
+       case 5:
+         hashed = pseudoRandomProbe(hashed);
+         break;
+     }
+    }
+    HashMap.elements[hashed] = keyPair;
+    printf("Inserted %i with probing\n",value);
 }
 
 int get(char* key){
+}
+
+
+int linearProbe(int hashed){
+}
+
+int linearStepProbe(int hashed){
+}
+
+int quadraticProbe(int hashed){
+}
+
+int bucketHashing(int hashed){
+}
+
+int pseudoRandomProbe(int hashed){
+}
+
+int doubleHashing(int hashed){
 }
